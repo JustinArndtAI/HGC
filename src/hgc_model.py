@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from transformers import GPT2LMHeadModel, GPT2Model
-from .hgc_layer import HGC_Layer
+from hgc_layer import HGC_Layer
 
 class GPT2_With_HGC(GPT2LMHeadModel):
     """

@@ -1,6 +1,6 @@
-import torch
+﻿import torch
 import torch.nn as nn
-from .vsa import VSA
+from vsa import VSA
 
 class HGC_Layer(nn.Module):
     """
