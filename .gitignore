@@ -12,3 +12,7 @@ pip-delete-this-directory.txt
 Thumbs.db
 .swp
 *.swo
+
+# Ignore large model files and generated data
+models/
+data/

@@ -1,4 +1,4 @@
-﻿import numpy as np
+import numpy as np
 
 class VSA:
     """
@@ -15,7 +15,6 @@ class VSA:
     def bind(self, vec1: np.ndarray, vec2: np.ndarray) -> np.ndarray:
         """
         Binds two vectors using circular convolution.
-        C = A ⨂ B  =>  ifft(fft(A) * fft(B))
         """
         if vec1.shape != (self.dim,) or vec2.shape != (self.dim,):
             raise ValueError(f"All vectors must have dimension {self.dim}")
@@ -26,16 +25,13 @@ class VSA:
 
     def unbind(self, vec1: np.ndarray, vec2: np.ndarray) -> np.ndarray:
         """
-        Unbinds two vectors using circular correlation (the approximate inverse of bind).
-        B ≈ A' ⨂ C  =>  ifft(fft(A).conj() * fft(C))
-        The complex conjugate (.conj()) is CRITICAL for this to be an inverse.
+        Unbinds two vectors using circular correlation. The complex conjugate is critical.
         """
         if vec1.shape != (self.dim,) or vec2.shape != (self.dim,):
             raise ValueError(f"All vectors must have dimension {self.dim}")
 
         fft1 = np.fft.fft(vec1)
         fft2 = np.fft.fft(vec2)
-        # The complex conjugate here is the key to making this the inverse operation.
         return np.fft.ifft(fft1.conj() * fft2).real
 
     def bundle(self, vec_list: list) -> np.ndarray:
@@ -49,4 +45,3 @@ class VSA:
         if norm1 == 0 or norm2 == 0:
             return 0.0
         return np.dot(vec1, vec2) / (norm1 * norm2)
-
